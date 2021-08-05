@@ -154,11 +154,21 @@ insert into revista values
 (NULL,'Revista Digital Universitaria','UNAM','Carrano Morgana','48','22-28','2012-09-01','2000-01-01','Trimestral','566',4);
 
 INSERT INTO articulo VALUES
-(NULL,'Las tecnologías visuales en movimiento','Tecnología', 'tecvisu@movi.com', 'Informe Tecnico', 3),
-(NULL,'Canteras de San Luis Potosí', 'Historia','sanluis@canteras.gov', 'Informe Tecnico',12),
+(NULL,'Las tecnologías visuales en movimiento','Tecnología', 'tecvisu@gmail.com', 'Informe Técnico', 3),
+(NULL,'Canteras de San Luis Potosí', 'Historia','canteras@sanluis.gov', 'Informe Tecnico',12),
 (NULL,'Los artistas del Códice Laud','Arte, Historia', NULL ,'Informe Tecnico' ,25),
-(NULL,'De la orfandad al cobijo de la palabra','Palabra, sociedad', 'huerfanitos@letrados.com','Informe Tecnico',65),
-(NULL,'Estetica de lo circundante','Arte','circundante@estetica.com','Informe Tecnico' ,NULL);
+(NULL,'De la orfandad al cobijo de la palabra','Palabra, sociedad', 'huerfanitos@hotmail.com','Informe Tecnico',65),
+(NULL,'Estetica de lo circundante','Arte','circundante@gmail.com','Informe Tecnico' ,NULL),
+(NULL,'El juego de la enseñanza','Pedagogía' , NULL,'ACTA DE CONGRESO', NULL),
+(NULL, 'Una inundación global de plásticos','Global, ecosistema','plasticos@recycle.com','ACTA DE CONGRESO',76),
+(NULL,'Ideas y Sensibilidades en Chile del siglo XX','Chile, Historia','sigloxx@chile.com','ACTA DE CONGRESO', NULL),
+(NULL,'Utopismo y Juventud','Juventud, sociedad', NULL ,'ACTA DE CONGRESO',77),
+(NULL,'Los bacteriófagos','Virus, Bacterias','virusbacteria@yahoo.com','ACTA DE CONGRESO', NULL),
+(NULL,'Entrevista a Edgar Medina','Entrevista', NULL ,'Revista',72),
+(NULL,'Palabras para convocar alegría','Psicología','palabrasalegres@gmail.com','Revista', NULL),
+(NULL,'Medición de las creencias de los científicos','Científicos',	'creenciascien@hotmail.com','Revista',80),
+(NULL,'Estudio anatómico en algunas especies','Anatomía, comparativa',NULL,'Revista',66),
+(NULL,'La controversia Rutherford-Bohr','Historia, átomo',NULL,'Revista', NULL);
 
 insert into informe_tecnico values
 (NULL,123,'Centro Cacaras','2019-09-23','1200',1),

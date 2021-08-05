@@ -310,14 +310,14 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Investigadores` (
   `ap_materno` VARCHAR(45) NOT NULL,
   `Sexo` VARCHAR(1) NOT NULL,
   `Curp` VARCHAR(18) NOT NULL,
-  `idGruposInvestigacion` INT NOT NULL,
+  `idGrupos_Investigacion` INT NOT NULL,
   `idInstitucion` INT NOT NULL,
   PRIMARY KEY (`idInvestigadores`),
-  INDEX `fk_Investigadores_GruposInvestigacion1_idx` (`idGruposInvestigacion` ASC) VISIBLE,
+  INDEX `fk_Investigadores_Grupos_Investigacion1_idx` (`idGrupos_Investigacion` ASC) VISIBLE,
   INDEX `fk_Investigadores_Institucion1_idx` (`idInstitucion` ASC) VISIBLE,
-  CONSTRAINT `fk_Investigadores_GruposInvestigacion1`
-    FOREIGN KEY (`idGruposInvestigacion`)
-    REFERENCES `Proyecto_BD2409`.`GruposInvestigacion` (`idGruposInvestigacion`)
+  CONSTRAINT `fk_Investigadores_Grupos_Investigacion1`
+    FOREIGN KEY (`idGrupos_Investigacion`)
+    REFERENCES `Proyecto_BD2409`.`Grupos_Investigacion` (`idGrupos_Investigacion`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Investigadores_Institucion1`
