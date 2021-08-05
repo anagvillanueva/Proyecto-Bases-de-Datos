@@ -27,33 +27,32 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Artículo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`Artículo` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Articulo` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Artículo` (
-  `idArtículo` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo` (
+  `idArticulo` INT NOT NULL AUTO_INCREMENT,
   `Título` VARCHAR(45) NOT NULL,
   `Keywords` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NULL,
   `Publicación` VARCHAR(45) NOT NULL,
   `idCopia` INT NULL,
-  PRIMARY KEY (`idArtículo`),
-  INDEX `fk_Artículo_Copia2_idx` (`idCopia` ASC) VISIBLE)
+  PRIMARY KEY (`idArticulo`),
+  INDEX `fk_Articulo_Copia2_idx` (`idCopia` ASC) VISIBLE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Artículo_Autor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`Artículo_Autor` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Articulo_Autor` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Artículo_Autor` (
-  `idArtículo` INT NOT NULL,
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo_Autor` (
+  `idArticulo` INT NOT NULL,
   `idAutor` INT NOT NULL,
-  PRIMARY KEY (`idArtículo`, `idAutor`),
-  INDEX `fk_Artículo_has_Autor_Autor1_idx` (`idAutor` ASC) VISIBLE,
-  INDEX `fk_Artículo_has_Autor_Artículo1_idx` (`idArtículo` ASC) VISIBLE)
+  PRIMARY KEY (`idArticulo`, `idAutor`),
+  INDEX `fk_Articulo_Autor_Autor1_idx` (`idAutor` ASC) VISIBLE,
+  INDEX `fk_Articulo_Autor_Articulo1_idx` (`idArticulo` ASC) VISIBLE)
 ENGINE = InnoDB;
-
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Autor`
@@ -128,28 +127,25 @@ END IF;
 END $$
 DELIMITER ;
 
-select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
-from information_schema.triggers
-where trigger_schema = 'Proyecto_BD2409';
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Congreso_Artículo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`Congreso_Artículo` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Congreso_Articulo` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso_Artículo` (
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso_Articulo` (
   `idCongreso` INT NOT NULL,
-  `idArtículo` INT NOT NULL,
-  PRIMARY KEY (`idCongreso`, `idArtículo`),
-  INDEX `fk_Congreso_has_Artículo_Artículo1_idx` (`idArtículo` ASC) VISIBLE,
-  INDEX `fk_Congreso_has_Artículo_Congreso1_idx` (`idCongreso` ASC) VISIBLE,
-  CONSTRAINT `fk_Congreso_has_Artículo_Congreso1`
+  `idArticulo` INT NOT NULL,
+  PRIMARY KEY (`idCongreso`, `idArticulo`),
+  INDEX `fk_Congreso_Articulo_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
+  INDEX `fk_Congreso_Articulo_Congreso1_idx` (`idCongreso` ASC) VISIBLE,
+  CONSTRAINT `fk_Congreso_Articulo_Congreso1`
     FOREIGN KEY (`idCongreso`)
     REFERENCES `Proyecto_BD2409`.`Congreso` (`idCongreso`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Congreso_has_Artículo_Artículo1`
-    FOREIGN KEY (`idArtículo`)
-    REFERENCES `Proyecto_BD2409`.`Artículo` (`idArtículo`)
+  CONSTRAINT `fk_Congreso_Articulo_Articulo1`
+    FOREIGN KEY (`idArticulo`)
+    REFERENCES `Proyecto_BD2409`.`Articulo` (`idArticulo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -188,11 +184,6 @@ signal sqlstate'45000' SET MESSAGE_TEXT = 'Por favor indica en donde esta la cop
 END IF;
 END $$
 DELIMITER ;
-
-select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
-from information_schema.triggers
-where trigger_schema = 'Proyecto_BD2409';
-
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`GruposInvestigacion`
 -- -----------------------------------------------------
@@ -221,28 +212,24 @@ END IF;
 END $$
 DELIMITER ;
 
-select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
-from information_schema.triggers
-where trigger_schema = 'Proyecto_BD2409';
-
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`InformeTécnico`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`InformeTécnico` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Informe_Tecnico` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`InformeTécnico` (
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Informe_Tecnico` (
   `idInforme` INT NOT NULL AUTO_INCREMENT,
   `Numero_informe` VARCHAR(45) NOT NULL,
   `CentroPublicación` VARCHAR(45) NOT NULL,
   `Fecha` DATE NOT NULL,
   `Costos` VARCHAR(45) NOT NULL,
-  `idArtículo` INT NOT NULL,
+  `idArticulo` INT NOT NULL,
   PRIMARY KEY (`idInforme`),
   UNIQUE INDEX `Numero_informe_UNIQUE` (`Numero_informe` ASC) VISIBLE,
-  INDEX `fk_InformeTécnico_Artículo1_idx` (`idArtículo` ASC) VISIBLE,
-  CONSTRAINT `fk_InformeTécnico_Artículo1`
-    FOREIGN KEY (`idArtículo`)
-    REFERENCES `Proyecto_BD2409`.`Artículo` (`idArtículo`)
+  INDEX `fk_Informe_Tecnico_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
+  CONSTRAINT `fk_Informe_Tecnico_Articulo1`
+    FOREIGN KEY (`idArticulo`)
+    REFERENCES `Proyecto_BD2409`.`Articulo` (`idArticulo`)
     ON DELETE NO ACTION
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
@@ -289,8 +276,6 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Investigadores` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails
--- (`proyecto_bd2409`.`investigadores`, CONSTRAINT `fk_Investigadores_GruposInvestigacion1` FOREIGN KEY (`idGruposInvestigacion`) REFERENCES `gruposinvestigacion` (`idGruposInvestigacion`))
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Lab_campus`
 -- -----------------------------------------------------
@@ -354,22 +339,22 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Revista_Artículo`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`Revista_Artículo` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Revista_Articulo` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista_Artículo` (
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista_Articulo` (
   `idRevistaCientifica` INT NOT NULL,
-  `idArtículo` INT NOT NULL,
-  PRIMARY KEY (`idRevistaCientifica`, `idArtículo`),
-  INDEX `fk_Revista_has_Artículo_Artículo1_idx` (`idArtículo` ASC) VISIBLE,
-  INDEX `fk_Revista_has_Artículo_Revista1_idx` (`idRevistaCientifica` ASC) VISIBLE,
-  CONSTRAINT `fk_Revista_has_Artículo_Revista1`
+  `idArticulo` INT NOT NULL,
+  PRIMARY KEY (`idRevistaCientifica`, `idArticulo`),
+  INDEX `fk_Revista_Articulo_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
+  INDEX `fk_Revista_Articulo_Revista1_idx` (`idRevistaCientifica` ASC) VISIBLE,
+  CONSTRAINT `fk_Revista_Articulo_Revista1`
     FOREIGN KEY (`idRevistaCientifica`)
     REFERENCES `Proyecto_BD2409`.`Revista` (`idRevistaCientifica`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Revista_has_Artículo_Artículo1`
-    FOREIGN KEY (`idArtículo`)
-    REFERENCES `Proyecto_BD2409`.`Artículo` (`idArtículo`)
+  CONSTRAINT `fk_Revista_Articulo_Articulo1`
+    FOREIGN KEY (`idArticulo`)
+    REFERENCES `Proyecto_BD2409`.`Articulo` (`idArticulo`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -391,4 +376,6 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-select * from Congreso;
+select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
+from information_schema.triggers
+where trigger_schema = 'Proyecto_BD2409';
