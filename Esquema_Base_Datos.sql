@@ -21,7 +21,13 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Areas` (
   UNIQUE INDEX `Nombre_UNIQUE` (`Nombre` ASC) VISIBLE)
 ENGINE = InnoDB;
 
-
+DELIMITER $$ 
+DROP TRIGGER IF EXISTS bi_area $$
+CREATE TRIGGER bi_area BEFORE INSERT ON Areas
+FOR EACH ROW BEGIN
+set NEW.Nombre = upper(NEW.Nombre);
+END $$
+DELIMITER ;
 
 
 -- -----------------------------------------------------
@@ -31,10 +37,10 @@ DROP TABLE IF EXISTS `Proyecto_BD2409`.`Articulo` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo` (
   `idArticulo` INT NOT NULL AUTO_INCREMENT,
-  `Título` VARCHAR(45) NOT NULL,
+  `Titulo` VARCHAR(45) NOT NULL,
   `Keywords` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NULL,
-  `Publicación` VARCHAR(45) NOT NULL,
+  `Publicacion` VARCHAR(45) NOT NULL,
   `idCopia` INT NULL,
   PRIMARY KEY (`idArticulo`),
   INDEX `fk_Articulo_Copia2_idx` (`idCopia` ASC) VISIBLE)
@@ -44,6 +50,9 @@ DELIMITER $$
 DROP TRIGGER IF EXISTS bi_articulo $$
 CREATE TRIGGER bi_articulo BEFORE INSERT ON Articulo
 FOR EACH ROW BEGIN
+set NEW.Titulo = upper(NEW.Titulo);
+set NEW.Keywords = upper(NEW.Keywords);
+set NEW.Publicacion = upper(NEW.Publicacion);
 IF(NEW.Publicacion <> 'INFORME TECNICO' AND NEW.Publicacion <> 'ACTA DE CONGRESO' AND NEW.Publicacion <> 'REVISTA') THEN
 signal sqlstate'45000' SET MESSAGE_TEXT = 'Forma de publicacion no valida';
 END IF;
@@ -56,9 +65,10 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Articulo_Autor` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo_Autor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idArticulo` INT NOT NULL,
   `idAutor` INT NOT NULL,
-  PRIMARY KEY (`idArticulo`, `idAutor`),
+  PRIMARY KEY (`id`),
   INDEX `fk_Articulo_Autor_Autor1_idx` (`idAutor` ASC) VISIBLE,
   INDEX `fk_Articulo_Autor_Articulo1_idx` (`idArticulo` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -88,15 +98,27 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Autor` (
   CONSTRAINT `fk_Autor_Areas1`
     FOREIGN KEY (`idAreas`)
     REFERENCES `Proyecto_BD2409`.`Areas` (`idAreas`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Autor_Institucion1`
     FOREIGN KEY (`idInstitucion`)
     REFERENCES `Proyecto_BD2409`.`Institucion` (`idInstitucion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Autor $$
+CREATE TRIGGER bi_Autor BEFORE INSERT ON Autor
+FOR EACH ROW BEGIN
+set NEW.Nombre = upper(NEW.Nombre);
+set NEW.ap_paterno = upper(NEW.ap_paterno);
+set NEW.ap_materno = upper(NEW.ap_materno);
+set NEW.RFC = upper(NEW.RFC);
+set NEW.Nivel = upper(NEW.Nivel);
+set NEW.Tema_esp = upper(NEW.Tema_esp);
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Congreso`
@@ -112,15 +134,15 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso` (
   `Fecha_final` DATE NOT NULL,
   `TipoCongreso` VARCHAR(45) NOT NULL,
   `Frecuencia` VARCHAR(20) NOT NULL,
-  `Costos` VARCHAR(45) NOT NULL,
+  `Costos` INT NOT NULL,
   `idPais` INT NOT NULL,
   PRIMARY KEY (`idCongreso`),
   INDEX `fk_Congreso_Pais1_idx` (`idPais` ASC) VISIBLE,
   CONSTRAINT `fk_Congreso_Pais1`
     FOREIGN KEY (`idPais`)
     REFERENCES `Proyecto_BD2409`.`Pais` (`idPais`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 DELIMITER $$
@@ -133,6 +155,12 @@ END IF;
 IF(NEW.TipoCongreso = 'NACIONAL') THEN
 set NEW.idPais = 1;
 END IF;
+set NEW.Nombre = upper(NEW.Nombre);
+set NEW.Ciudad = upper(NEW.Ciudad);
+set NEW.TipoCongreso = upper(NEW.TipoCongreso);
+set NEW.Frecuencia = upper(NEW.Frecuencia);
+END $$
+DELIMITER ;
 END $$
 DELIMITER ;
 
@@ -142,21 +170,22 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Congreso_Articulo` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso_Articulo` (
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idCongreso` INT NOT NULL,
   `idArticulo` INT NOT NULL,
-  PRIMARY KEY (`idCongreso`, `idArticulo`),
+  PRIMARY KEY (`id`),
   INDEX `fk_Congreso_Articulo_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
   INDEX `fk_Congreso_Articulo_Congreso1_idx` (`idCongreso` ASC) VISIBLE,
   CONSTRAINT `fk_Congreso_Articulo_Congreso1`
     FOREIGN KEY (`idCongreso`)
     REFERENCES `Proyecto_BD2409`.`Congreso` (`idCongreso`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Congreso_Articulo_Articulo1`
     FOREIGN KEY (`idArticulo`)
     REFERENCES `Proyecto_BD2409`.`Articulo` (`idArticulo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -175,13 +204,13 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Copia` (
   CONSTRAINT `fk_Copia_Investigadores1`
     FOREIGN KEY (`idInvestigadores`)
     REFERENCES `Proyecto_BD2409`.`Investigadores` (`idInvestigadores`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Copia_Lab_campus1`
     FOREIGN KEY (`idLab_campus`)
     REFERENCES `Proyecto_BD2409`.`Lab_campus` (`idLab_campus`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 DELIMITER $$
@@ -196,28 +225,26 @@ DELIMITER ;
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`GruposInvestigacion`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`GruposInvestigacion` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Grupos_Investigacion` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`GruposInvestigacion` (
-  `idGruposInvestigacion` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Grupos_Investigacion` (
+  `idGrupos_Investigacion` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
   `idAreas` INT NOT NULL,
-  PRIMARY KEY (`idGruposInvestigacion`),
-  INDEX `fk_GruposInvestigacion_Areas1_idx` (`idAreas` ASC) VISIBLE,
-  CONSTRAINT `fk_GruposInvestigacion_Areas1`
+  PRIMARY KEY (`idGrupos_Investigacion`),
+  INDEX `fk_Grupos_Investigacion_Areas1_idx` (`idAreas` ASC) VISIBLE,
+  CONSTRAINT `fk_Grupos_Investigacion_Areas1`
     FOREIGN KEY (`idAreas`)
     REFERENCES `Proyecto_BD2409`.`Areas` (`idAreas`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 DELIMITER $$
-DROP TRIGGER IF EXISTS bu_GpoInv $$
-CREATE TRIGGER bu_GpoInv BEFORE UPDATE ON GruposInvestigacion
+DROP TRIGGER IF EXISTS bi_Gpo_Inv $$
+CREATE TRIGGER bi_Gpo_Inv BEFORE INSERT ON Grupos_Investigacion
 FOR EACH ROW BEGIN
-IF(NEW.Nombre = OLD.Nombre) THEN
-signal sqlstate'45000' SET MESSAGE_TEXT = 'No puede haber dos grupos de investigacion con el mismo nombre';
-END IF;
+set NEW.Nombre = upper(NEW.Nombre);
 END $$
 DELIMITER ;
 
@@ -228,10 +255,10 @@ DROP TABLE IF EXISTS `Proyecto_BD2409`.`Informe_Tecnico` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Informe_Tecnico` (
   `idInforme` INT NOT NULL AUTO_INCREMENT,
-  `Numero_informe` VARCHAR(45) NOT NULL,
-  `CentroPublicación` VARCHAR(45) NOT NULL,
+  `Numero_informe` INT NOT NULL,
+  `Centro_publicacion` VARCHAR(45) NOT NULL,
   `Fecha` DATE NOT NULL,
-  `Costos` VARCHAR(45) NOT NULL,
+  `Costos` INT NOT NULL,
   `idArticulo` INT NOT NULL,
   PRIMARY KEY (`idInforme`),
   UNIQUE INDEX `Numero_informe_UNIQUE` (`Numero_informe` ASC) VISIBLE,
@@ -239,9 +266,17 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Informe_Tecnico` (
   CONSTRAINT `fk_Informe_Tecnico_Articulo1`
     FOREIGN KEY (`idArticulo`)
     REFERENCES `Proyecto_BD2409`.`Articulo` (`idArticulo`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
+
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Informe_Tecnico $$
+CREATE TRIGGER bi_Informe_Tecnico BEFORE INSERT ON Informe_Tecnico
+FOR EACH ROW BEGIN
+set NEW.Centro_publicacion = upper(NEW.Centro_publicacion);
+END $$
+DELIMITER ;
 
 
 -- -----------------------------------------------------
@@ -255,6 +290,13 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Institucion` (
   PRIMARY KEY (`idInstitucion`))
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Institucion $$
+CREATE TRIGGER bi_Institucion BEFORE INSERT ON Institucion
+FOR EACH ROW BEGIN
+set NEW.Nombre = upper(NEW.Nombre);
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Investigadores`
@@ -276,15 +318,26 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Investigadores` (
   CONSTRAINT `fk_Investigadores_GruposInvestigacion1`
     FOREIGN KEY (`idGruposInvestigacion`)
     REFERENCES `Proyecto_BD2409`.`GruposInvestigacion` (`idGruposInvestigacion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Investigadores_Institucion1`
     FOREIGN KEY (`idInstitucion`)
     REFERENCES `Proyecto_BD2409`.`Institucion` (`idInstitucion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Investigadores $$
+CREATE TRIGGER bi_Investigadores BEFORE INSERT ON Investigadores
+FOR EACH ROW BEGIN
+set NEW.Nombre = upper(NEW.Nombre);
+set NEW.ap_paterno = upper(NEW.ap_paterno);
+set NEW.ap_materno = upper(NEW.ap_materno);
+set NEW.Sexo = upper(NEW.Sexo);
+set NEW.Curp = upper(NEW.Curp);
+END $$
+DELIMITER ;
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Lab_campus`
 -- -----------------------------------------------------
@@ -299,11 +352,17 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Lab_campus` (
   CONSTRAINT `fk_Lab_campus_Institucion1`
     FOREIGN KEY (`idInstitucion`)
     REFERENCES `Proyecto_BD2409`.`Institucion` (`idInstitucion`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
-
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Lab_campus $$
+CREATE TRIGGER bi_Lab_campus BEFORE INSERT ON Lab_campus
+FOR EACH ROW BEGIN
+set NEW.Nombre = upper(NEW.Nombre);
+END $$
+DELIMITER ;
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Pais`
 -- -----------------------------------------------------
@@ -318,6 +377,14 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Pais` (
   UNIQUE INDEX `Pais_ISO_UNIQUE` (`Pais_ISO` ASC) VISIBLE)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Pais $$
+CREATE TRIGGER bi_Pais BEFORE INSERT ON Pais
+FOR EACH ROW BEGIN
+set NEW.Pais = upper(NEW.Pais);
+set NEW.Pais_ISO = upper(NEW.Pais_ISO);
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Revista`
@@ -331,8 +398,8 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista` (
   `Editor` VARCHAR(45) NOT NULL,
   `Numero` INT NOT NULL,
   `Paginas` VARCHAR(45) NOT NULL,
-  `Fecha_publicacion` VARCHAR(45) NOT NULL,
-  `Fecha_inicio` VARCHAR(45) NOT NULL,
+  `Fecha_publicacion` DATE NOT NULL,
+  `Fecha_inicio` DATE NOT NULL,
   `Frecuencia` VARCHAR(45) NOT NULL,
   `Costo` INT NOT NULL,
   `idTemasRevista` INT NOT NULL,
@@ -341,10 +408,24 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista` (
   CONSTRAINT `fk_Revista_TemasRevista1`
     FOREIGN KEY (`idTemasRevista`)
     REFERENCES `Proyecto_BD2409`.`TemasRevista` (`idTemasRevista`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Revista $$
+CREATE TRIGGER bi_Revista BEFORE INSERT ON Revista
+FOR EACH ROW BEGIN
+IF(NEW.Fecha_publicacion <= NEW.Fecha_inicio AND NEW.Numero <> 1) THEN
+signal sqlstate'45002' SET MESSAGE_TEXT = 'Por favor corroboré las fechas';
+END iF;
+set NEW.NombreRevista = upper(NEW.NombreRevista);
+set NEW.Editorial = upper(NEW.Editorial);
+set NEW.Editor = upper(NEW.Editor);
+set NEW.Paginas = upper(NEW.Paginas);
+set NEW.Frecuencia = upper(NEW.Frecuencia);
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Revista_Artículo`
@@ -352,34 +433,42 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Revista_Articulo` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista_Articulo` (
+  `id` INT NOT NULL,
   `idRevistaCientifica` INT NOT NULL,
   `idArticulo` INT NOT NULL,
-  PRIMARY KEY (`idRevistaCientifica`, `idArticulo`),
+  PRIMARY KEY (`id`),
   INDEX `fk_Revista_Articulo_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
   INDEX `fk_Revista_Articulo_Revista1_idx` (`idRevistaCientifica` ASC) VISIBLE,
   CONSTRAINT `fk_Revista_Articulo_Revista1`
     FOREIGN KEY (`idRevistaCientifica`)
     REFERENCES `Proyecto_BD2409`.`Revista` (`idRevistaCientifica`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_Revista_Articulo_Articulo1`
     FOREIGN KEY (`idArticulo`)
     REFERENCES `Proyecto_BD2409`.`Articulo` (`idArticulo`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`TemasRevista`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `Proyecto_BD2409`.`TemasRevista` ;
+DROP TABLE IF EXISTS `Proyecto_BD2409`.`Temas_Revista` ;
 
-CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`TemasRevista` (
-  `idTemasRevista` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Temas_Revista` (
+  `idTemas_Revista` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idTemasRevista`))
+  PRIMARY KEY (`idTemas_Revista`))
 ENGINE = InnoDB;
+
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_Temas_Revista $$
+CREATE TRIGGER bi_Temas_Revista BEFORE INSERT ON Temas_Revista
+FOR EACH ROW BEGIN
+set NEW.Nombre = upper(NEW.Nombre);
+DELIMITER ;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
