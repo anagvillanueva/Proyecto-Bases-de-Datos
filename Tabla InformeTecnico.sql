@@ -5,4 +5,3 @@ insert into informetecnico values
 (NULL,'45','Centro Paris','2020-06-20','1300','4'),
 (NULL,'133','Centro Valladolid','2001-09-23','902','5');
 
-SELECT * FROM informetécnico;
