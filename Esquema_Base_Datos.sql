@@ -66,8 +66,8 @@ DROP TABLE IF EXISTS `Proyecto_BD2409`.`Articulo_Autor` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo_Autor` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `idArticulo` INT NOT NULL,
   `idAutor` INT NOT NULL,
+  `idArticulo` INT NOT NULL,
   PRIMARY KEY (`id`),
   INDEX `fk_Articulo_Autor_Autor1_idx` (`idAutor` ASC) VISIBLE,
   INDEX `fk_Articulo_Autor_Articulo1_idx` (`idArticulo` ASC) VISIBLE)
@@ -161,7 +161,7 @@ set NEW.TipoCongreso = upper(NEW.TipoCongreso);
 set NEW.Frecuencia = upper(NEW.Frecuencia);
 END $$
 DELIMITER ;
-END $$
+END $
 DELIMITER ;
 
 -- -----------------------------------------------------
@@ -402,12 +402,12 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista` (
   `Fecha_inicio` DATE NOT NULL,
   `Frecuencia` VARCHAR(45) NOT NULL,
   `Costo` INT NOT NULL,
-  `idTemasRevista` INT NOT NULL,
+  `idTemas_Revista` INT NOT NULL,
   PRIMARY KEY (`idRevistaCientifica`),
-  INDEX `fk_Revista_TemasRevista1_idx` (`idTemasRevista` ASC) VISIBLE,
+  INDEX `fk_Revista_Temas_Revista1_idx` (`idTemas_Revista` ASC) VISIBLE,
   CONSTRAINT `fk_Revista_TemasRevista1`
-    FOREIGN KEY (`idTemasRevista`)
-    REFERENCES `Proyecto_BD2409`.`TemasRevista` (`idTemasRevista`)
+    FOREIGN KEY (`idTemas_Revista`)
+    REFERENCES `Proyecto_BD2409`.`Temas_Revista` (`idTemas_Revista`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;

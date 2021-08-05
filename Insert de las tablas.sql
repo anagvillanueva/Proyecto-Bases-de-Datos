@@ -1,4 +1,3 @@
--- Insert en la tabla Pais
 insert into pais values
 ('1', 'Mexico','MEX'),
 ('2', 'Francia','FRA'),
@@ -16,7 +15,6 @@ insert into pais values
 ('14', 'Belgica', 'BEL'),
 ('15', 'Japon', 'JP');
 
--- Insert en la tabla Institucion 
 INSERT INTO institucion VALUES ('411', 'FES Aragon'), 
 ('303', 'FES Iztacala'),
 ('91', 'Bristol University'),
@@ -60,7 +58,6 @@ INSERT INTO areas VALUES ('1', 'Ingenieria y tecnologia'),
 ('4', 'Ciencias sociales y administrativas'),
 ('5', 'Educacion y humanidades');
 
--- Insert en la tabla Tema_revista
 insert into temas_revista values
 ('1','Investigacion'),
 ('2','Tecnico-Profesional'),
@@ -82,7 +79,6 @@ INSERT INTO grupos_investigacion VALUES ('11', 'Mateatletas', '1'),
 ('19', 'Ribonucleicos', '2'),
 ('20', 'Boinas azules', '1');
 
--- Insert en la tabla Lab_campus
 INSERT INTO lab_campus VALUES ('19', 'Laboratorio L3', '411'),
 ('45', 'UPIICSA Zacatenco', '678'),
 ('12', 'Laboratorio de fisica', '12'),
@@ -127,7 +123,6 @@ INSERT INTO investigadores VALUES
 ('852316', 'Brandon', 'Garcia', 'Flowers', 'm', 'GAFB8711231LMIRDB5', '15' ,'3512'),
 ('989403', 'Ixchel', 'Triste', 'Enojada', 'f', 'TREI030511DRGVRCI3', '13', '411');
 
--- Insert en la tabla Copia
 INSERT INTO copia VALUES ('03', '862321', NULL),
 ('12', '523641', NULL),
 ('25', '123456', NULL),
@@ -138,7 +133,6 @@ INSERT INTO copia VALUES ('03', '862321', NULL),
 ('77', NULL, '42'),
 ('80', NULL, '04');
 
--- Insert en la tabla Congreso
 INSERT INTO congreso VALUES 
 ('1','Congreso Internacional de Salud y Bienestar','20','Paris','2018-09-02','2018-09-03','Internacional','Anual','2500','2'),
 ('2','Congreso de Divulgacion de la Ciencia','22','Guanajuato','2012-02-15','2012-02-18','Nacional','Trimestral','2800','1'),
@@ -151,6 +145,28 @@ INSERT INTO congreso VALUES
 ('9', 'Congreso de Nanotecnologia y Ciencias A.','50','Tokio','2019-01-07','2019-01-09','Internacional','Anual','2600','15'),
 ('10', 'Congreso de Karlsruhe','17','Munich','2020-07-02','2020-07-04','Internacional','Semestral','1290','12');
 
+insert into revista values 
+(NULL,'Instituto de Investigaciones E.','Amazonas','Sven Dupré','10','270-280','2010-08-27','2000-01-01','Anual','350',1),
+(NULL,'Ritmo Soy de Tus Manos.','Kelvin R','Paola M del Consuelo','34','100-120','2015-02-13','1998-01-01','Semestral','340',4),
+(NULL,'Ciencias de la Salud','Vertiente','Jesus Silva B','6','17-18','2006-04-17','2001-01-01','Anual','600',10),
+(NULL,'Cuadernos Americanos','Primera Epoca','Eduardo Valdez','19','34-38','2019-11-25','2000-01-25','Anual','340',3),
+(NULL,'Biotecnologia en Movimiento','FCYQ','Angela Digorti','54','174-178','2020-03-16','1993-01-01','Semestral','573',8),
+(NULL,'Revista Digital Universitaria','UNAM','Carrano Morgana','48','22-28','2012-09-01','2000-01-01','Trimestral','566',4);
+
+INSERT INTO articulo VALUES
+(NULL,'Las tecnologías visuales en movimiento','Tecnología', 'tecvisu@movi.com', 'Informe Tecnico', 3),
+(NULL,'Canteras de San Luis Potosí', 'Historia','sanluis@canteras.gov', 'Informe Tecnico',12),
+(NULL,'Los artistas del Códice Laud','Arte, Historia', NULL ,'Informe Tecnico' ,25),
+(NULL,'De la orfandad al cobijo de la palabra','Palabra, sociedad', 'huerfanitos@letrados.com','Informe Tecnico',65),
+(NULL,'Estetica de lo circundante','Arte','circundante@estetica.com','Informe Tecnico' ,NULL);
+
+insert into informe_tecnico values
+(NULL,123,'Centro Cacaras','2019-09-23','1200',1),
+(NULL,455,'Centro Buenos Aires','2002-11-03','480',2),
+(NULL,23,'Centro Anahuac MX','2009-07-13','140',3),
+(NULL,45,'Centro Paris','2020-06-20','1300',4),
+(NULL,133,'Centro Valladolid','2001-09-23','902',5);
+
 select * from pais;
 select * from institucion;
 select * from areas;
@@ -160,3 +176,7 @@ select * from lab_campus;
 select * from investigadores;
 select * from copia;
 select * from congreso;
+select * from revista;
+select * from articulo;
+select * from informe_tecnico;
+
