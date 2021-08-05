@@ -10,3 +10,5 @@ INSERT INTO Lab_campus VALUES ('19', 'Laboratorio L3', '411'),
 ('51', 'Laboratorio de ciencias', '11'),
 ('11', 'Laboratorio L1', '411'),
 ('42', 'UPIICSA Zacatenco', '678');
+
+select * from revista;
