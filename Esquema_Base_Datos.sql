@@ -5,6 +5,7 @@
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET foreign_key_checks = 0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 CREATE DATABASE IF NOT EXISTS `Proyecto_BD2409`;
 USE `Proyecto_BD2409`;
@@ -19,6 +20,8 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Areas` (
   PRIMARY KEY (`idAreas`),
   UNIQUE INDEX `Nombre_UNIQUE` (`Nombre` ASC) VISIBLE)
 ENGINE = InnoDB;
+
+
 
 
 -- -----------------------------------------------------
@@ -119,6 +122,9 @@ FOR EACH ROW BEGIN
 IF(NEW.Fecha_final <= NEW.Fecha_inicio) THEN
 signal sqlstate'45000' SET MESSAGE_TEXT = 'Fecha final no valida';
 END IF;
+IF(NEW.TipoCongreso = 'NACIONAL') THEN
+set NEW.idPais = 1;
+END IF;
 END $$
 DELIMITER ;
 
@@ -177,11 +183,15 @@ DELIMITER $$
 DROP TRIGGER IF EXISTS bi_copia $$
 CREATE TRIGGER bi_copia BEFORE INSERT ON Copia
 FOR EACH ROW BEGIN
-IF(NEW.idInvestigadores AND NEW.idLab_campus) THEN
+IF(NEW.idInvestigadores is null AND NEW.idLab_campus is null) THEN
 signal sqlstate'45000' SET MESSAGE_TEXT = 'Por favor indica en donde esta la copia';
 END IF;
 END $$
 DELIMITER ;
+
+select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
+from information_schema.triggers
+where trigger_schema = 'Proyecto_BD2409';
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`GruposInvestigacion`
@@ -203,13 +213,17 @@ ENGINE = InnoDB;
 
 DELIMITER $$
 DROP TRIGGER IF EXISTS bu_GpoInv $$
-CREATE TRIGGER bi_GpoInv BEFORE UPDATE ON GruposInvestigacion
+CREATE TRIGGER bu_GpoInv BEFORE UPDATE ON GruposInvestigacion
 FOR EACH ROW BEGIN
 IF(NEW.Nombre = OLD.Nombre) THEN
 signal sqlstate'45000' SET MESSAGE_TEXT = 'No puede haber dos grupos de investigacion con el mismo nombre';
 END IF;
 END $$
 DELIMITER ;
+
+select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
+from information_schema.triggers
+where trigger_schema = 'Proyecto_BD2409';
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`InformeTécnico`
@@ -275,7 +289,8 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Investigadores` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
+-- Error Code: 1452. Cannot add or update a child row: a foreign key constraint fails
+-- (`proyecto_bd2409`.`investigadores`, CONSTRAINT `fk_Investigadores_GruposInvestigacion1` FOREIGN KEY (`idGruposInvestigacion`) REFERENCES `gruposinvestigacion` (`idGruposInvestigacion`))
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Lab_campus`
 -- -----------------------------------------------------
@@ -375,3 +390,5 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+select * from Congreso;
