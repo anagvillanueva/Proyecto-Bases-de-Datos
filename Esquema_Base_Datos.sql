@@ -40,6 +40,15 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo` (
   INDEX `fk_Articulo_Copia2_idx` (`idCopia` ASC) VISIBLE)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_articulo $$
+CREATE TRIGGER bi_articulo BEFORE INSERT ON Articulo
+FOR EACH ROW BEGIN
+IF(NEW.Publicacion <> 'INFORME TECNICO' AND NEW.Publicacion <> 'ACTA DE CONGRESO' AND NEW.Publicacion <> 'REVISTA') THEN
+signal sqlstate'45000' SET MESSAGE_TEXT = 'Forma de publicacion no valida';
+END IF;
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Artículo_Autor`
