@@ -15,7 +15,7 @@ USE `Proyecto_BD2409`;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Areas` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Areas` (
-  `idAreas` INT NOT NULL AUTO_INCREMENT,
+  `idAreas` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idAreas`),
   UNIQUE INDEX `Nombre_UNIQUE` (`Nombre` ASC) VISIBLE)
@@ -36,8 +36,8 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Articulo` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo` (
-  `idArticulo` INT NOT NULL AUTO_INCREMENT,
-  `Titulo` VARCHAR(45) NOT NULL,
+  `idArticulo` INT NOT NULL,
+  `Titulo` VARCHAR(150) NOT NULL,
   `Keywords` VARCHAR(45) NOT NULL,
   `Email` VARCHAR(45) NULL,
   `Publicacion` VARCHAR(45) NOT NULL,
@@ -79,11 +79,11 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Autor` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Autor` (
-  `idAutor` INT NOT NULL AUTO_INCREMENT,
+  `idAutor` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `ap_paterno` VARCHAR(45) NOT NULL,
   `ap_materno` VARCHAR(45) NOT NULL,
-  `RFC` VARCHAR(12) NOT NULL,
+  `RFC` VARCHAR(13) NOT NULL,
   `Email` VARCHAR(45) NULL,
   `Nivel` INT NULL,
   `Grado` VARCHAR(45) NOT NULL,
@@ -126,7 +126,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Congreso` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso` (
-  `idCongreso` INT NOT NULL AUTO_INCREMENT,
+  `idCongreso` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `Edicion` INT NOT NULL,
   `Ciudad` VARCHAR(45) NOT NULL,
@@ -195,7 +195,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Copia` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Copia` (
-  `idCopia` INT NOT NULL AUTO_INCREMENT,
+  `idCopia` INT NOT NULL,
   `idInvestigadores` INT NULL,
   `idLab_campus` INT NULL,
   PRIMARY KEY (`idCopia`),
@@ -228,7 +228,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Grupos_Investigacion` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Grupos_Investigacion` (
-  `idGrupos_Investigacion` INT NOT NULL AUTO_INCREMENT,
+  `idGrupos_Investigacion` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `idAreas` INT NOT NULL,
   PRIMARY KEY (`idGrupos_Investigacion`),
@@ -254,7 +254,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Informe_Tecnico` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Informe_Tecnico` (
-  `idInforme` INT NOT NULL AUTO_INCREMENT,
+  `idInforme` INT NOT NULL,
   `Numero_informe` INT NOT NULL,
   `Centro_publicacion` VARCHAR(45) NOT NULL,
   `Fecha` DATE NOT NULL,
@@ -285,7 +285,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Institucion` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Institucion` (
-  `idInstitucion` INT NOT NULL AUTO_INCREMENT,
+  `idInstitucion` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idInstitucion`))
 ENGINE = InnoDB;
@@ -304,7 +304,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Investigadores` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Investigadores` (
-  `idInvestigadores` INT NOT NULL AUTO_INCREMENT,
+  `idInvestigadores` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `ap_paterno` VARCHAR(45) NOT NULL,
   `ap_materno` VARCHAR(45) NOT NULL,
@@ -344,7 +344,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Lab_campus` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Lab_campus` (
-  `idLab_campus` INT NOT NULL AUTO_INCREMENT,
+  `idLab_campus` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   `idInstitucion` INT NOT NULL,
   PRIMARY KEY (`idLab_campus`),
@@ -369,7 +369,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Pais` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Pais` (
-  `idPais` INT NOT NULL AUTO_INCREMENT,
+  `idPais` INT NOT NULL,
   `Pais` VARCHAR(45) NOT NULL,
   `Pais_ISO` VARCHAR(6) NOT NULL,
   PRIMARY KEY (`idPais`),
@@ -392,7 +392,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Revista` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista` (
-  `idRevistaCientifica` INT NOT NULL AUTO_INCREMENT,
+  `idRevistaCientifica` INT NOT NULL,
   `NombreRevista` VARCHAR(45) NOT NULL,
   `Editorial` VARCHAR(45) NOT NULL,
   `Editor` VARCHAR(45) NOT NULL,
@@ -433,7 +433,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Revista_Articulo` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista_Articulo` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `idRevistaCientifica` INT NOT NULL,
   `idArticulo` INT NOT NULL,
   PRIMARY KEY (`id`),
@@ -458,7 +458,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `Proyecto_BD2409`.`Temas_Revista` ;
 
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Temas_Revista` (
-  `idTemas_Revista` INT NOT NULL AUTO_INCREMENT,
+  `idTemas_Revista` INT NOT NULL,
   `Nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idTemas_Revista`))
 ENGINE = InnoDB;

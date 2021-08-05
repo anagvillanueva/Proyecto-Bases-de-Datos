@@ -146,36 +146,56 @@ INSERT INTO congreso VALUES
 ('10', 'Congreso de Karlsruhe','17','Munich','2020-07-02','2020-07-04','Internacional','Semestral','1290','12');
 
 insert into revista values 
-(NULL,'Instituto de Investigaciones E.','Amazonas','Sven Dupré','10','270-280','2010-08-27','2000-01-01','Anual','350',1),
-(NULL,'Ritmo Soy de Tus Manos.','Kelvin R','Paola M del Consuelo','34','100-120','2015-02-13','1998-01-01','Semestral','340',4),
-(NULL,'Ciencias de la Salud','Vertiente','Jesus Silva B','6','17-18','2006-04-17','2001-01-01','Anual','600',10),
-(NULL,'Cuadernos Americanos','Primera Epoca','Eduardo Valdez','19','34-38','2019-11-25','2000-01-25','Anual','340',3),
-(NULL,'Biotecnologia en Movimiento','FCYQ','Angela Digorti','54','174-178','2020-03-16','1993-01-01','Semestral','573',8),
-(NULL,'Revista Digital Universitaria','UNAM','Carrano Morgana','48','22-28','2012-09-01','2000-01-01','Trimestral','566',4);
+(45,'Instituto de Investigaciones E.','Amazonas','Sven Dupré','10','270-280','2010-08-27','2000-01-01','Anual','350',1),
+(41,'Ritmo Soy de Tus Manos.','Kelvin R','Paola M del Consuelo','34','100-120','2015-02-13','1998-01-01','Semestral','340',4),
+(47,'Ciencias de la Salud','Vertiente','Jesus Silva B','6','17-18','2006-04-17','2001-01-01','Anual','600',10),
+(49,'Cuadernos Americanos','Primera Epoca','Eduardo Valdez','19','34-38','2019-11-25','2000-01-25','Anual','340',3),
+(43,'Biotecnologia en Movimiento','FCYQ','Angela Digorti','54','174-178','2020-03-16','1993-01-01','Semestral','573',8),
+(48,'Revista Digital Universitaria','UNAM','Carrano Morgana','48','22-28','2012-09-01','2000-01-01','Trimestral','566',4);
 
 INSERT INTO articulo VALUES
-(NULL,'Las tecnologías visuales en movimiento','Tecnología', 'tecvisu@gmail.com', 'Informe Técnico', 3),
-(NULL,'Canteras de San Luis Potosí', 'Historia','canteras@sanluis.gov', 'Informe Tecnico',12),
-(NULL,'Los artistas del Códice Laud','Arte, Historia', NULL ,'Informe Tecnico' ,25),
-(NULL,'De la orfandad al cobijo de la palabra','Palabra, sociedad', 'huerfanitos@hotmail.com','Informe Tecnico',65),
-(NULL,'Estetica de lo circundante','Arte','circundante@gmail.com','Informe Tecnico' ,NULL),
-(NULL,'El juego de la enseñanza','Pedagogía' , NULL,'ACTA DE CONGRESO', NULL),
-(NULL, 'Una inundación global de plásticos','Global, ecosistema','plasticos@recycle.com','ACTA DE CONGRESO',76),
-(NULL,'Ideas y Sensibilidades en Chile del siglo XX','Chile, Historia','sigloxx@chile.com','ACTA DE CONGRESO', NULL),
-(NULL,'Utopismo y Juventud','Juventud, sociedad', NULL ,'ACTA DE CONGRESO',77),
-(NULL,'Los bacteriófagos','Virus, Bacterias','virusbacteria@yahoo.com','ACTA DE CONGRESO', NULL),
-(NULL,'Entrevista a Edgar Medina','Entrevista', NULL ,'Revista',72),
-(NULL,'Palabras para convocar alegría','Psicología','palabrasalegres@gmail.com','Revista', NULL),
-(NULL,'Medición de las creencias de los científicos','Científicos',	'creenciascien@hotmail.com','Revista',80),
-(NULL,'Estudio anatómico en algunas especies','Anatomía, comparativa',NULL,'Revista',66),
-(NULL,'La controversia Rutherford-Bohr','Historia, átomo',NULL,'Revista', NULL);
+(13,'Las tecnologías visuales en movimiento','Tecnología', 'tecvisu@gmail.com', 'Informe Tecnico', 3),
+(15,'Complicaciones con el agujero negro', 'Física, agujero negro', NULL , 'Informe Tecnico',12),
+(22,'Inteligencia Artificial en Combate','Inteligencia Artificial', NULL ,'Informe Tecnico' ,25),
+(33,'Aplicación de la Vacuna en San Luis Potosí','Vacuna,COVID-19', 'vacunacion@sanluis.gov','Informe Tecnico',65),
+(25,'Infecciones en Tabasco','COVID-19, infección','covid@tabasco.gov','Informe Tecnico' ,NULL),
+(14,'El juego de la enseñanza','Pedagogía' , NULL,'Acta de Congreso', NULL),
+(5, 'Una inundación global de plásticos','Global, ecosistema','plasticos@recycle.com','Acta de Congreso',76),
+(7,'Ideas y Sensibilidades en Chile del siglo XX','Chile, Historia','sigloxx@chile.com','Acta de Congreso', NULL),
+(6,'Utopismo y Juventud','Juventud, sociedad', NULL ,'Acta de Congreso',77),
+(9,'Los bacteriófagos','Virus, Bacterias','virusbacteria@yahoo.com','Acta de Congreso', NULL),
+(39,'Entrevista a Edgar Medina','Entrevista', NULL ,'Revista',72),
+(53,'Prótesis y el deporte competitivo ','Prótesis','protesis@sports.com','Revista', NULL),
+(78,'Medición de las creencias de los científicos','Científicos',	'creenciascien@hotmail.com','Revista',80),
+(96,'Estudio anatómico comparativo en algunas especies','Anatomía, comparativa',NULL,'Revista',66),
+(27,'La controversia Rutherford-Bohr','Historia, átomo',NULL,'Revista', NULL);
 
 insert into informe_tecnico values
-(NULL,123,'Centro Cacaras','2019-09-23','1200',1),
-(NULL,455,'Centro Buenos Aires','2002-11-03','480',2),
-(NULL,23,'Centro Anahuac MX','2009-07-13','140',3),
-(NULL,45,'Centro Paris','2020-06-20','1300',4),
-(NULL,133,'Centro Valladolid','2001-09-23','902',5);
+(51,123,'Centro Cacaras','2019-09-23','1200',1),
+(53,455,'Centro Buenos Aires','2002-11-03','480',2),
+(58,23,'Centro Anahuac MX','2009-07-13','140',3),
+(52,45,'Centro Paris','2020-06-20','1300',4),
+(55,133,'Centro Valladolid','2001-09-23','902',5);
+
+INSERT INTO Autor VALUES ('10', 'Sven' , 'Dupre', 'Aguilar', 'DUPS7505281H0', 'duprescritor@harvard.com', '2', 'Doctor', 'Tecnologia', '1', '3512'),
+('12', 'Jose Armando', 'Hernandez', 'Soubervielle', 'HESJ690721CL7', 'soubervielle@ciencias.tierra.com', '1', 'Maestro', 'Canteras', '2', '17'),
+('14', 'Maria Isabel', 'Alvarez', 'Icaza Longoria', 'ALIM720314GK9', 'mial@codices.com', '2', 'Doctora', 'Codices', '5', '1066'),
+('16','Paola Maria del Consuelo', 'Cruz', 'Sanchez', 'CRSP610919L3A', 'paolacruz@gmail.com', '3', 'Licenciada', 'Literatura', '5', '1066'),
+('18', 'Joel', 'Hernandez', 'Otañez', 'HEOJ590220TB4', 'joelho@broad.com', '2', 'Doctor', 'Estetica', '5', '1230'),
+('120', 'Mildred', 'Melendez', 'Fonseca', 'MELM761103D7V', 'fomana@aragon.unam.mx', '3', 'Licenciada', 'Aprendizaje', '5', '411'),
+('140', 'Ana', 'Mitzi', 'Hernandez', 'MIHA631202RQ1', 'amhe@outlook.com', '2', 'Doctora', 'Aprendizaje', '5', '411'),
+('160', 'Lucero', 'Aleman', 'Rodriguez', 'ALRL680628KT3', 'alemanlucro@outlook.com', '2', 'Doctor', 'Aprendizaje', '5', '411'),
+('180', 'Edgar', 'Mena', 'Trejo', 'MENE640228PZ2', 'tremena21@gmail.com', '3', 'Licenciado', 'Literatura', '5', '1066'),
+('1200', 'Jose de Jesus', 'Silva', 'Bautista', 'SIBJ581015IT5', 'jjbautista@unam.mx', '2', 'Doctor', 'Religion', '5', '303'),
+('1400', 'Nallely Venazir', 'Herrera', 'Escobar', 'HEEN770719G5F', 'escovena@gmail.com', '2', 'Doctora', 'Religion', '5', '303'),
+('1600', 'Eduardo', 'Deves', 'Valdes', 'DEVE750530BR1', 'devae@igr.com', '3', 'Licenciado', 'Historia', '5', '4210'),
+('1800', 'Hugo Eduardo', 'Biagini', 'Cortez', 'BIAH690110MX3', 'biaganieduardo@col.edu', '2', 'Doctora', 'Historia', '5', '85'),
+('1820', 'Axel ', 'Neri', 'Lucero', 'NELA011228PG4', 'neriluceroaxel@aragon.unam.mx', '4', 'Ingeniero', 'Ingenieria', '1', '411'),
+('1840', 'Alejandro', 'Herrera', 'Villavicencio', 'HEVA011123TG4', 'villalejandro@gmail.com', '2', 'Doctor', 'Nanotecnologia', '1', '92'),
+('1860', 'Pamela', 'Reyes', 'Cordero', 'RECP010415UJ2', 'parc@iztacala.unam.mx', '1', 'Maestra', 'Salud', '3', '303'),
+('1880', 'Alfredo', 'Botello', 'Herrera', 'BOHA010431WB3', 'alfredobotella@outlook.com', '4', 'Ingeniero', 'Minerales', '1', '17'),
+('1900', 'Ana', 'Gutierrez', 'Villanueva', 'GUVA010815TG1', 'anagvilla@aragon.unam.mx', '2', 'Doctora', 'Tecnologia', '1', '411'),
+('1920', 'Omar', 'Veltran', 'Virueña', 'VEVO011123IK3', 'omarveltrab@ingenieria.unam.mx', '4', 'Ingeniero', 'Suelo', '1', '11');
 
 select * from pais;
 select * from institucion;
@@ -189,4 +209,4 @@ select * from congreso;
 select * from revista;
 select * from articulo;
 select * from informe_tecnico;
-
+select * from autor;
