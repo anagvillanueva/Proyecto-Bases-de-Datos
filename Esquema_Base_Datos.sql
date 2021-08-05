@@ -16,8 +16,10 @@ DROP TABLE IF EXISTS `Proyecto_BD2409`.`Areas` ;
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Areas` (
   `idAreas` INT NOT NULL AUTO_INCREMENT,
   `Nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idAreas`))
+  PRIMARY KEY (`idAreas`),
+  UNIQUE INDEX `Nombre_UNIQUE` (`Nombre` ASC) VISIBLE)
 ENGINE = InnoDB;
+
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Artículo`
@@ -110,7 +112,19 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_congreso $$
+CREATE TRIGGER bi_congreso BEFORE INSERT ON Congreso
+FOR EACH ROW BEGIN
+IF(NEW.Fecha_final <= NEW.Fecha_inicio) THEN
+signal sqlstate'45000' SET MESSAGE_TEXT = 'Fecha final no valida';
+END IF;
+END $$
+DELIMITER ;
 
+select trigger_name, event_manipulation, event_object_table, action_statement, trigger_schema
+from information_schema.triggers
+where trigger_schema = 'Proyecto_BD2409';
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`Congreso_Artículo`
 -- -----------------------------------------------------
@@ -143,7 +157,7 @@ DROP TABLE IF EXISTS `Proyecto_BD2409`.`Copia` ;
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Copia` (
   `idCopia` INT NOT NULL AUTO_INCREMENT,
   `idInvestigadores` INT NULL,
-  `Lab_campus_idLab_campus` INT NULL,
+  `idLab_campus` INT NULL,
   PRIMARY KEY (`idCopia`),
   INDEX `fk_Copia_Investigadores1_idx` (`idInvestigadores` ASC) VISIBLE,
   INDEX `fk_Copia_Lab_campus1_idx` (`Lab_campus_idLab_campus` ASC) VISIBLE,
@@ -159,6 +173,15 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Copia` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bi_copia $$
+CREATE TRIGGER bi_copia BEFORE INSERT ON Copia
+FOR EACH ROW BEGIN
+IF(NEW.idInvestigadores AND NEW.idLab_campus) THEN
+signal sqlstate'45000' SET MESSAGE_TEXT = 'Por favor indica en donde esta la copia';
+END IF;
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`GruposInvestigacion`
@@ -178,6 +201,15 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`GruposInvestigacion` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+DELIMITER $$
+DROP TRIGGER IF EXISTS bu_GpoInv $$
+CREATE TRIGGER bi_GpoInv BEFORE UPDATE ON GruposInvestigacion
+FOR EACH ROW BEGIN
+IF(NEW.Nombre = OLD.Nombre) THEN
+signal sqlstate'45000' SET MESSAGE_TEXT = 'No puede haber dos grupos de investigacion con el mismo nombre';
+END IF;
+END $$
+DELIMITER ;
 
 -- -----------------------------------------------------
 -- Table `Proyecto_BD2409`.`InformeTécnico`
@@ -192,12 +224,13 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`InformeTécnico` (
   `Costos` VARCHAR(45) NOT NULL,
   `idArtículo` INT NOT NULL,
   PRIMARY KEY (`idInforme`),
+  UNIQUE INDEX `Numero_informe_UNIQUE` (`Numero_informe` ASC) VISIBLE,
   INDEX `fk_InformeTécnico_Artículo1_idx` (`idArtículo` ASC) VISIBLE,
   CONSTRAINT `fk_InformeTécnico_Artículo1`
     FOREIGN KEY (`idArtículo`)
     REFERENCES `Proyecto_BD2409`.`Artículo` (`idArtículo`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -270,7 +303,7 @@ DROP TABLE IF EXISTS `Proyecto_BD2409`.`Pais` ;
 CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Pais` (
   `idPais` INT NOT NULL AUTO_INCREMENT,
   `Pais` VARCHAR(45) NOT NULL,
-  `Pais_ISO` VARCHAR(45) NOT NULL,
+  `Pais_ISO` VARCHAR(6) NOT NULL,
   PRIMARY KEY (`idPais`),
   UNIQUE INDEX `Pais_UNIQUE` (`Pais` ASC) VISIBLE,
   UNIQUE INDEX `Pais_ISO_UNIQUE` (`Pais_ISO` ASC) VISIBLE)
