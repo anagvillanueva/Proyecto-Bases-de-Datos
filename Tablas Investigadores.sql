@@ -71,7 +71,7 @@ INSERT INTO Investigadores VALUES
 ('235121', 'Julio', 'Cortez', 'Villanueva', 'm', 'COVJ011123IMDRFGJ2', '20', '23'),
 ('362154', 'William', 'Thompson', 'Hernandez', 'm', 'THHW850925JMNCRFW3', '15', '3512'),
 ('966664', 'Alexander', 'Orozco', 'Reyes', 'm', 'ORRA011024TYHBCRA1', '18', '66'),
-('562141', 'Teresa', 'Sanchez', 'Moreno', 'f', 'SAMT890321JNYUGCA1', '17', '303'),
+('562141', 'Teresa', 'Sanchez', 'Moreno', 'f', 'SAMT890321JNYUGCA1', '16', '303'),
 ('123456', 'Paulina', 'Reyes', 'Sanchez', 'f', 'RESP010331INHTRCP3', '16', '678'),
 ('265326', 'Juan', 'Trejo', 'Jhonson', 'm' , 'TRJJ991028LMNYHJJ8', '15', '3512'),
 ('564842', 'Oscar', 'Cordero', 'Hernandez', 'm', 'COHO651023JMOKDRW3', '13', '411'),

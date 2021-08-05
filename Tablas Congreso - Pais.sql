@@ -15,6 +15,7 @@ insert into pais values
 ('14', 'Belgica', 'BEL'),
 ('15', 'Japon', 'JP');
 
+select * from congreso;
 INSERT INTO congreso VALUES 
 ('1','Congreso Internacional de Salud y Bienestar','20','Paris','2018-09-02','2018-09-03','Internacional','Anual','2500','2'),
 ('2','Congreso de Divulgacion de la Ciencia','22','Guanajuato','2012-02-15','2012-02-18','Nacional','Trimestral','2800','1'),
