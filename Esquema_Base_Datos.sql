@@ -160,14 +160,14 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Copia` (
   `idLab_campus` INT NULL,
   PRIMARY KEY (`idCopia`),
   INDEX `fk_Copia_Investigadores1_idx` (`idInvestigadores` ASC) VISIBLE,
-  INDEX `fk_Copia_Lab_campus1_idx` (`Lab_campus_idLab_campus` ASC) VISIBLE,
+  INDEX `fk_Copia_Lab_campus1_idx` (`idLab_campus` ASC) VISIBLE,
   CONSTRAINT `fk_Copia_Investigadores1`
     FOREIGN KEY (`idInvestigadores`)
     REFERENCES `Proyecto_BD2409`.`Investigadores` (`idInvestigadores`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Copia_Lab_campus1`
-    FOREIGN KEY (`Lab_campus_idLab_campus`)
+    FOREIGN KEY (`idLab_campus`)
     REFERENCES `Proyecto_BD2409`.`Lab_campus` (`idLab_campus`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
