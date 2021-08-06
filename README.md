@@ -8,13 +8,13 @@ El siguiente proyecto de Bases de Datos se basa en el *modelo de negocios* de un
 
 ###### MySQL
 #### Alumnos que realizarón este proyecto: 
-📍 Alfredo Botello Herrera 
+📍 Alfredo Botello Herrera (VellAlf)
 
-📍 Ana F Gutiérrez Villanueva 
+📍 Ana F Gutiérrez Villanueva (anagvillanueva)
 
-📍 Axel Neri Lucero 
+📍 Axel Neri Lucero (axelnerilucero)
 
-📍 Jorge Omar Beltran 
+📍 Jorge Omar Beltran (Jobsih)
 
 📍 Lizeth E Hernández Piedras 
 
