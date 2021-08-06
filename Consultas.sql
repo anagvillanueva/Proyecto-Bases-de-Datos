@@ -17,12 +17,6 @@ Update Investigadores SET
 Curp = if(left(curp,11) = 'H', 'H', concat_ws('',left(curp,10), 'H', right(Curp,7)))
 Where sexo = 'm' AND Curp not like '____H';
 
-select patote.*
-from (
-select re.*, b.idRevistaCientifica idRevista, b.idArticulo
-from revista re 
-NATURAL LEFT JOIN revista_articulo b
-NATURAL LEFT JOIN articulo ac) patote;
 /*
 Lista los articulos que se publicaron en una revista con el id de revista,
 nombre de la revista, id de articulo y el titulo del articulo no.2
@@ -142,7 +136,7 @@ from grupos_investigacion gi
 LEFT JOIN Investigadores inv ON (gi.idGrupos_Investigacion = inv.idGrupos_Investigacion) 
 WHERE inv.idGrupos_Investigacion is null;
 
--- Lista cuantos Investigadores hay en cada Grupo de Investigación
+-- Lista cuantos Investigadores hay en cada Grupo de Investigación no.21
 select  gi.idGrupos_Investigacion Id_Grupo, gi.nombre Nombre_del_Grupo , count(*) Miembros
 from Grupos_Investigacion gi
 INNER JOIN investigadores inv

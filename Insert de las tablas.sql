@@ -229,5 +229,3 @@ INSERT INTO articulo_autor VALUES (NULL, '10', '13'),
 (NULL, '1980', '96'),
 (NULL, '1840', '22'),
 (NULL, '1960', '27');
-
-select * from autor;
