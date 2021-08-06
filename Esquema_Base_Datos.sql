@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Articulo_Autor` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idAutor` INT NOT NULL,
   `idArticulo` INT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`,`idAutor`,`idArticulo`),
   INDEX `fk_Articulo_Autor_Autor1_idx` (`idAutor` ASC) VISIBLE,
   INDEX `fk_Articulo_Autor_Articulo1_idx` (`idArticulo` ASC) VISIBLE)
 ENGINE = InnoDB;
@@ -173,7 +173,7 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Congreso_Articulo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idCongreso` INT NOT NULL,
   `idArticulo` INT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`,`idCongreso`,`idArticulo`),
   INDEX `fk_Congreso_Articulo_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
   INDEX `fk_Congreso_Articulo_Congreso1_idx` (`idCongreso` ASC) VISIBLE,
   CONSTRAINT `fk_Congreso_Articulo_Congreso1`
@@ -436,7 +436,7 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista_Articulo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `idRevistaCientifica` INT NOT NULL,
   `idArticulo` INT NOT NULL,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`,`idRevistaCientifica`,`idArticulo`),
   INDEX `fk_Revista_Articulo_Articulo1_idx` (`idArticulo` ASC) VISIBLE,
   INDEX `fk_Revista_Articulo_Revista1_idx` (`idRevistaCientifica` ASC) VISIBLE,
   CONSTRAINT `fk_Revista_Articulo_Revista1`
