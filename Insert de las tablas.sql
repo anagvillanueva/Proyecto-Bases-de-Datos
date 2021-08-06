@@ -171,11 +171,11 @@ INSERT INTO articulo VALUES
 (27,'La controversia Rutherford-Bohr','Historia, átomo',NULL,'Revista', NULL);
 
 insert into informe_tecnico values
-(51,123,'Centro Cacaras','2019-09-23','1200',1),
-(53,455,'Centro Buenos Aires','2002-11-03','480',2),
-(58,23,'Centro Anahuac MX','2009-07-13','140',3),
-(52,45,'Centro Paris','2020-06-20','1300',4),
-(55,133,'Centro Valladolid','2001-09-23','902',5);
+(51,123,'Centro Cacaras','2019-09-23','1200',13),
+(53,455,'Centro Buenos Aires','2002-11-03','480',15),
+(58,23,'Centro Anahuac MX','2009-07-13','140',22),
+(52,45,'Centro Paris','2020-06-20','1300',25),
+(55,133,'Centro Valladolid','2001-09-23','902',33);
 
 INSERT INTO Autor VALUES ('10', 'Sven' , 'Dupre', 'Aguilar', 'DUPS7505281H0', 'duprescritor@harvard.com', '2', 'Doctor', 'Tecnologia', '1', '3512'),
 ('12', 'Jose Armando', 'Hernandez', 'Soubervielle', 'HESJ690721CL7', 'soubervielle@ciencias.tierra.com', '1', 'Maestro', 'Canteras', '2', '17'),
