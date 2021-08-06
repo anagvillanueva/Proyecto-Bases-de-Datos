@@ -17,3 +17,5 @@ El siguiente proyecto de Bases de Datos se basa en el *modelo de negocios* de un
 📍 Jorge Omar Beltran 
 
 📍 Lizeth E Hernández Piedras 
+
+📍 David A Lazcano Garcia 
