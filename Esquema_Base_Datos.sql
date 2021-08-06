@@ -2,7 +2,7 @@
 -- Wed Aug  4 17:18:53 2021
 -- Model: New Model    Version: 1.0
 -- MySQL Workbench Forward Engineering
-
+DROP DATABASE IF EXISTS proyecto_bd2409;
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET foreign_key_checks = 0;

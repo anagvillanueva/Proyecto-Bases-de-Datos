@@ -187,9 +187,9 @@ INSERT INTO Autor VALUES (10, 'Sven' , 'Dupre', 'Aguilar', 'DUPS7505281H0', 'dup
 (1820, 'Axel ', 'Neri', 'Lucero', 'NELA011228PG4', 'neriluceroaxel@aragon.unam.mx', '4', 'Ingeniero', 'Ingenieria', 1, 411),
 (1840, 'Alejandro', 'Herrera', 'Villavicencio', 'HEVA011123TG4', 'villalejandro@gmail.com', '2', 'Doctor', 'Nanotecnologia', 1, 92),
 (1860, 'Pamela', 'Reyes', 'Cordero', 'RECP010415UJ2', 'parc@iztacala.unam.mx', '1', 'Maestra', 'Salud', 3, 303),
-(1880, 'Alfredo', 'Botello', 'Herrera', 'BOHA010431WB3', 'alfredobotella@outlook.com', '4', 'Ingeniero', 'Minerales', 1, 17),
+(1880, 'Alfredo', 'Botello', 'Herrera', 'BOHA010430WB3', 'alfredobotella@outlook.com', '4', 'Ingeniero', 'Minerales', 1, 17),
 (1920, 'Omar', 'Veltran', 'Virueña', 'VEVO011123IK3', 'omarveltrab@ingenieria.unam.mx', '4', 'Ingeniero', 'Suelo', 1, 11),
-(1940, 'Juan', 'Inarritu', 'Lopez', 'INL030512JED4', 'inarritu2@iztacala.unam.mx', '2', 'Doctor', 'Salud', 2, 303),
+(1940, 'Juan', 'Inarritu', 'Lopez', 'INLJ030510ED4', 'inarritu2@iztacala.unam.mx', '2', 'Doctor', 'Salud', 2, 303),
 (1960, 'Ryan', 'Reinolds', 'Rubio', 'RERR041123RG4', 'rrrubio@gmail.com', '2', 'Doctor', 'Quimica', 2, 5),
 (1980, 'Shakira', 'Ripoll', 'Jimenez', 'RIJS960418EF2', 'shaks@biologia.com', '1', 'Maestra', 'Biologia', 3, 303),
 (2000, 'Alfonso', 'Botero', 'Hernandez', 'BOHA990531GV3', 'alfonsobotero@outlook.com', '4', 'Ingeniero', 'Mecanica', 1, 11),
@@ -230,19 +230,4 @@ INSERT INTO articulo_autor VALUES (NULL, '10', '13'),
 (NULL, '1840', '22'),
 (NULL, '1960', '27');
 
-select * from pais;
-select * from institucion;
-select * from areas;
-select * from temas_revista;
-select * from grupos_investigacion;
-select * from lab_campus;
-select * from investigadores;
-select * from copia;
-select * from congreso;
-select * from revista;
-select * from articulo;
-select * from informe_tecnico;
 select * from autor;
-select * from revista_articulo;
-select * from congreso_articulo;
-select * from articulo_autor;
