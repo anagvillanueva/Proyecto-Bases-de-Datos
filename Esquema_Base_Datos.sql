@@ -401,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `Proyecto_BD2409`.`Revista` (
   `Fecha_publicacion` DATE NOT NULL,
   `Fecha_inicio` DATE NOT NULL,
   `Frecuencia` VARCHAR(45) NOT NULL,
-  `Costo` INT NOT NULL,
+  `Costos` INT NOT NULL,
   `idTemas_Revista` INT NOT NULL,
   PRIMARY KEY (`idRevistaCientifica`),
   INDEX `fk_Revista_Temas_Revista1_idx` (`idTemas_Revista` ASC) VISIBLE,
